@@ -1,0 +1,21 @@
+//
+//  NXJumpToSettingTools-prefix.pch
+//  NXJumpToSettingTools
+//
+//  Created by linyibin on 2017/4/6.
+//  Copyright © 2017年 NXAristotle. All rights reserved.
+//
+
+#ifndef NXJumpToSettingTools_prefix_pch
+#define NXJumpToSettingTools_prefix_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+//屏幕的宽度
+#define screenWidth  [UIScreen mainScreen].bounds.size.width
+#define screenHight  [UIScreen mainScreen].bounds.size.height
+
+
+#import "UIColor+HexColor.h"
+
+#endif /* NXJumpToSettingTools_prefix_pch */
