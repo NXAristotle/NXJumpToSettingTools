@@ -8,8 +8,16 @@
 
 #import "ViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "NXSystemaSettingType.h"
+#import "MJExtension.h"
+#import "NXJumpTypeSelect.h"
 
-@interface ViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate>
+@interface ViewController ()<UINavigationControllerDelegate,UIImagePickerControllerDelegate,UITextFieldDelegate>
+
+@property (nonatomic, strong) NSArray *models;  /**< 模型 */
+@property (weak, nonatomic) IBOutlet NXJumpTypeSelect *settingInput;
+
+@property (nonatomic, strong) NSString *selectedStr;   /**< 记录选择项 */
 
 @end
 
@@ -20,6 +28,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self temp];
+    [self setModeldata];
+    self.settingInput.delegate = self;
+    //  初始化选中行数为第0行
+   
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -29,20 +41,61 @@
     // Dispose of any resources that can be recreated.
 }
 
+
+#pragma mark - UITextFieldDelegate
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (self.selectedStr == nil || [self.selectedStr isEqualToString:@""]) {
+        self.settingInput.text = [self.models[0] CName];
+    }else
+    {
+        self.settingInput.text = self.selectedStr;
+    }
+  
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.selectedStr = textField.text;
+}
+
 #pragma mark - private method
+
+- (void)setModeldata {
+    
+    //  方式一
+//    NSArray *modelArray = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NXSystemaSettingType" ofType:@"plist"]];
+//    
+//    NSArray *models = [NXSystemaSettingType mj_objectArrayWithKeyValuesArray:modelArray];
+    
+    //  方式二：
+    self.models = [NXSystemaSettingType mj_objectArrayWithFile:[[NSBundle mainBundle] pathForResource:@"NXSystemaSettingType" ofType:@"plist"]];
+    
+//    NSLog(@"----models :%@",self.models);
+    
+    
+   
+}
 
 - (void)temp {
     
-    
-    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
-    imagePicker.delegate = self;
-    imagePicker.allowsEditing = YES;
-    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    //            [self presentModalViewController:imagePicker animated:YES];
-    [self presentViewController:imagePicker animated:YES completion:^{
+    if (TARGET_IPHONE_SIMULATOR == 1 && TARGET_OS_IPHONE == 1) {
+        //模拟器
         
-    }];
-    
+    }else{
+        //真机
+        UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+        imagePicker.delegate = self;
+        imagePicker.allowsEditing = YES;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+        //            [self presentModalViewController:imagePicker animated:YES];
+        [self presentViewController:imagePicker animated:YES completion:^{
+            
+        }];
+
+        
+    }
+
+
     /*
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
@@ -59,16 +112,50 @@
     */
 }
 
+
+/**
+ 处理跳转的逻辑
+
+ @param sender 跳转按钮
+ */
 - (IBAction)jumpToSetting:(UIButton *)sender {
+    
+    //  1.获取跳转的需求key
+    NSString *setName = self.settingInput.text;
+    
+    if (setName == nil || [setName isEqualToString:@""]) {
+        NSLog(@"未选择跳转项");
+        return;
+    }
+    
+    NSString *settingKey = @"";
+    for (NXSystemaSettingType *obj in self.models) {
+        if ([obj.CName isEqualToString:setName]) {
+            settingKey = obj.SettingType;
+            NSLog(@"--- : %@",obj.SettingType);
+            break;
+        }
+        NSLog(@"--------");
+    }
+    
+    if ([settingKey isEqualToString:@""]) {
+        NSLog(@"未包含所选项");
+        return;
+    }
+    
+    // 2.根据当前的系统版本做跳转的分类处理
+    
+ 
+    
     
     /*
      使用该API，必须之前申请过一次权限，否则直接跳转会跳转到桌面
      */
-    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-    if( [[UIApplication sharedApplication]canOpenURL:url] ) {
-        [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
-        }];
-    }
+//    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+//    if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+//        [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
+//        }];
+//    }
     
 }
 

@@ -7,8 +7,12 @@
 //
 
 #import "NXJumpTypeSelect.h"
+#import "NXSystemaSettingType.h"
+#import "MJExtension.h"
 
 @interface NXJumpTypeSelect ()<UIPickerViewDataSource,UIPickerViewDelegate>
+
+@property (nonatomic, strong) NSArray *models;  /**< 模型 */
 
 @end
 
@@ -19,6 +23,7 @@
 - (instancetype)initWithFrame:(CGRect)frame {
     if (self = [super initWithFrame:frame]) {
         [self setupUI];
+        [self setModeldata];
     }
     return self;
 }
@@ -26,6 +31,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     [self setupUI];
+    [self setModeldata];
 }
 
 - (void)setupUI {
@@ -46,6 +52,22 @@
     self.inputAccessoryView = endBtn;
 }
 
+
+- (void)setModeldata {
+    
+    //  方式一
+    //    NSArray *modelArray = [NSMutableArray arrayWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"NXSystemaSettingType" ofType:@"plist"]];
+    //
+    //    NSArray *models = [NXSystemaSettingType mj_objectArrayWithKeyValuesArray:modelArray];
+    
+    //  方式二：
+    self.models = [NXSystemaSettingType mj_objectArrayWithFile:[[NSBundle mainBundle] pathForResource:@"NXSystemaSettingType" ofType:@"plist"]];
+    
+    NSLog(@"----models :%@",self.models);
+    
+    
+}
+
 #pragma mark - UIPickerViewDataSource
 
 
@@ -56,15 +78,27 @@
 
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return 2;
+    return self.models.count;
 }
 
 #pragma mark - UIPickerViewDelegate
 
+- (nullable NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    NXSystemaSettingType *model = self.models[row];
+    return model.CName;
+    
+}
+
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     NSLog(@"did select %zd行",row);
+    NXSystemaSettingType *model = self.models[row];
+    self.text = model.CName;
+    
 }
+
+
 
 
 
