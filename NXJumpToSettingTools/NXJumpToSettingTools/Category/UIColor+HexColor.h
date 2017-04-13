@@ -12,9 +12,7 @@
 @interface UIColor (HexColor)
 /*!
  * @method 通过16进制计算颜色
- * @abstract
- * @discussion
- * @param 16机制
+ * @inColorString 16进制字符串
  * @result 颜色对象
  */
 + (UIColor *)colorFromHexRGB:(NSString *)inColorString;

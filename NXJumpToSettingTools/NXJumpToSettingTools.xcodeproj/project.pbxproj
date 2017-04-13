@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D2151DD81E9B844000CAF729 /* NXSystemaSettingType.plist in Resources */ = {isa = PBXBuildFile; fileRef = D2151DD71E9B844000CAF729 /* NXSystemaSettingType.plist */; };
 		D21EA1D81E95E28C00B81DCF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EA1D71E95E28C00B81DCF /* main.m */; };
 		D21EA1DB1E95E28C00B81DCF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EA1DA1E95E28C00B81DCF /* AppDelegate.m */; };
 		D21EA1DE1E95E28C00B81DCF /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D21EA1DD1E95E28C00B81DCF /* ViewController.m */; };
@@ -38,6 +39,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D2151DD71E9B844000CAF729 /* NXSystemaSettingType.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = NXSystemaSettingType.plist; sourceTree = "<group>"; };
 		D21EA1D31E95E28C00B81DCF /* NXJumpToSettingTools.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NXJumpToSettingTools.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D21EA1D71E95E28C00B81DCF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		D21EA1D91E95E28C00B81DCF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 				D21EA1E41E95E28C00B81DCF /* LaunchScreen.storyboard */,
 				D21EA1E71E95E28C00B81DCF /* Info.plist */,
 				D21EA1D61E95E28C00B81DCF /* Supporting Files */,
+				D2151DD71E9B844000CAF729 /* NXSystemaSettingType.plist */,
 			);
 			path = NXJumpToSettingTools;
 			sourceTree = "<group>";
@@ -290,6 +293,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D2151DD81E9B844000CAF729 /* NXSystemaSettingType.plist in Resources */,
 				D21EA1E61E95E28C00B81DCF /* LaunchScreen.storyboard in Resources */,
 				D21EA1E31E95E28C00B81DCF /* Assets.xcassets in Resources */,
 				D21EA1E11E95E28C00B81DCF /* Main.storyboard in Resources */,
@@ -562,6 +566,7 @@
 				D21EA2021E95E28C00B81DCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D21EA2031E95E28C00B81DCF /* Build configuration list for PBXNativeTarget "NXJumpToSettingToolsTests" */ = {
 			isa = XCConfigurationList;
@@ -570,6 +575,7 @@
 				D21EA2051E95E28C00B81DCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D21EA2061E95E28C00B81DCF /* Build configuration list for PBXNativeTarget "NXJumpToSettingToolsUITests" */ = {
 			isa = XCConfigurationList;
@@ -578,6 +584,7 @@
 				D21EA2081E95E28C00B81DCF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -19,7 +19,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    [self temp];
+    [self temp];
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -33,6 +33,17 @@
 
 - (void)temp {
     
+    
+    UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+    imagePicker.delegate = self;
+    imagePicker.allowsEditing = YES;
+    imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
+    //            [self presentModalViewController:imagePicker animated:YES];
+    [self presentViewController:imagePicker animated:YES completion:^{
+        
+    }];
+    
+    /*
     UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
     imagePicker.delegate = self;
     imagePicker.allowsEditing = YES;
@@ -40,14 +51,12 @@
     // 设置可用的媒体类型、默认只包含kUTTypeImage，如果想选择视频，请添加kUTTypeMovie
     // 如果选择的是视屏，允许的视屏时长为20秒
     imagePicker.videoMaximumDuration = 20;
-    // 允许的视屏质量（如果质量选取的质量过高，会自动降低质量）
-//    imagePicker.videoQuality = UIImagePickerControllerQualityTypeHigh;
-//    imagePicker.mediaTypes = @[(NSString *)kUTTypeMovie, (NSString *)kUTTypeImage];
+
     
     [self presentViewController:imagePicker animated:YES completion:^{
         
     }];
-    
+    */
 }
 
 - (IBAction)jumpToSetting:(UIButton *)sender {
@@ -60,6 +69,7 @@
         [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
         }];
     }
+    
 }
 
 - (BOOL)checkoutAuthorization {
