@@ -15,6 +15,12 @@
 #define screenWidth  [UIScreen mainScreen].bounds.size.width
 #define screenHight  [UIScreen mainScreen].bounds.size.height
 
+//  系统版本
+#define iOS10 [[[UIDevice currentDevice] systemVersion] floatValue] > 10
+#define iOS9  [[[UIDevice currentDevice] systemVersion] floatValue] > 9
+#define iOS8  [[[UIDevice currentDevice] systemVersion] floatValue] > 8
+#define iOS7  [[[UIDevice currentDevice] systemVersion] floatValue] > 7
+
 
 #import "UIColor+HexColor.h"
 

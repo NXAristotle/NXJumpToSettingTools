@@ -144,18 +144,65 @@
     }
     
     // 2.根据当前的系统版本做跳转的分类处理
-    
- 
-    
-    
-    /*
-     使用该API，必须之前申请过一次权限，否则直接跳转会跳转到桌面
-     */
-//    NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
-//    if( [[UIApplication sharedApplication]canOpenURL:url] ) {
-//        [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
-//        }];
-//    }
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    //     跳转前必须至少申请过一次权限，否则会crash（模拟器上是跳转到桌面）
+    //  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    if (iOS10) {
+        //  10以上的系统处理
+        //  该方法在iOS 10上会被出错，已经被弃用
+//        NSURL *appURL = [NSURL URLWithString:settingKey];
+//        if( [[UIApplication sharedApplication] canOpenURL:appURL] ) {
+//            
+//            [[UIApplication sharedApplication]openURL:appURL options:@{}completionHandler:^(BOOL        success) {
+//                
+//            }];
+            NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+            if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+                [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
+                }];
+            }
+        
+    }else if (iOS9)
+    {
+        //  9以上的系统处理
+        //  方法一
+        //        NSURL *appURL = [NSURL URLWithString:settingKey];
+        //        if( [[UIApplication sharedApplication] canOpenURL:appURL] ) {
+        //
+        //            [[UIApplication sharedApplication]openURL:appURL options:@{}completionHandler:^(BOOL        success) {
+        //
+        //            }];
+        //  方法二（跳转到本app内的设置项）
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+            [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
+            }];
+        }
+    }else if (iOS8)
+    {
+        //  8以上的系统处理
+        //  方法一
+        //        NSURL *appURL = [NSURL URLWithString:settingKey];
+        //        if( [[UIApplication sharedApplication] canOpenURL:appURL] ) {
+        //
+        //            [[UIApplication sharedApplication]openURL:appURL options:@{}completionHandler:^(BOOL        success) {
+        //
+        //            }];
+        //  方法二（跳转到本app内的设置项）
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if( [[UIApplication sharedApplication]canOpenURL:url] ) {
+            [[UIApplication sharedApplication]openURL:url options:@{}completionHandler:^(BOOL        success) {
+            }];
+        }
+
+    }else {
+        //  7系列系统的处理
+        NSURL *appURL = [NSURL URLWithString:settingKey];
+        if ([[UIApplication sharedApplication] canOpenURL:appURL])
+        {
+            [[UIApplication sharedApplication] openURL:appURL];
+        }
+    }
     
 }
 
